@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookChat - Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #response {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>BookChat Server Test Page</h1>
+    
+    <div class="test-section">
+        <h2>GET Test</h2>
+        <button onclick="testGet()">Test GET /messages</button>
+        <div id="getResponse" class="response"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>POST Test</h2>
+        <input type="text" id="messageInput" placeholder="Enter a test message">
+        <button onclick="testPost()">Test POST /messages</button>
+        <div id="postResponse" class="response"></div>
+    </div>
+
+    <script>
+        async function testGet() {
+            try {
+                const response = await fetch('/messages');
+                const data = await response.json();
+                document.getElementById('getResponse').textContent = 
+                    `GET Response: ${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                document.getElementById('getResponse').textContent = 
+                    `Error: ${error.message}`;
+            }
+        }
+
+        async function testPost() {
+            const message = document.getElementById('messageInput').value;
+            try {
+                const response = await fetch('/messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        content: message,
+                        author: 'Test User'
+                    }),
+                });
+                const data = await response.json();
+                document.getElementById('postResponse').textContent = 
+                    `POST Response: ${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                document.getElementById('postResponse').textContent = 
+                    `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

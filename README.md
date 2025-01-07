@@ -1,57 +1,94 @@
-# BookChat
+# BookChat - Git-Backed Messaging Application
 
-A basic chat application that allows users to communicate in real-time.
+A simple web-based messaging application that uses Git as a backend storage system. This application allows users to send and receive messages while maintaining a complete history of conversations using Git.
 
 ## Features
 
-- Real-time messaging
-- Simple and intuitive user interface
-- Text-based communication
+- Simple and clean web interface
+- Message persistence using Git
+- SQLite database for user management
+- Real-time message updates
+- Message history viewing
+- No complex frameworks - pure Python, HTML, CSS, and JavaScript
 
-## Prerequisites
+## Technical Stack
 
-- Python 3.x
-- Required Python packages (install using `pip install -r requirements.txt`):
-  - Flask
-  - Flask-SocketIO
-  - eventlet
+- Backend: Python (with built-in `http.server`)
+- Database: SQLite3
+- Frontend: HTML5, CSS3, JavaScript
+- Version Control: Git (via GitHub API)
+- Authentication: Basic user authentication
 
-## Installation
+## Project Structure
+
+```
+bookchat/
+├── README.md
+├── requirements.txt
+├── .env
+├── .gitignore
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── main.js
+├── templates/
+│   ├── index.html
+│   └── login.html
+└── src/
+    ├── server.py
+    ├── database.py
+    ├── git_handler.py
+    └── message_handler.py
+```
+
+## Setup Instructions
 
 1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/bookchat.git
-cd bookchat
-```
+   ```bash
+   git clone <repository-url>
+   cd bookchat
+   ```
 
-2. Install the required dependencies:
-```bash
-pip install -r requirements.txt
-```
+2. Create a virtual environment and activate it:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-## Running the Application
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-1. Start the server:
-```bash
-python app.py
-```
+4. Set up your GitHub credentials in `.env` file:
+   ```
+   GITHUB_TOKEN=your_github_token
+   ```
 
-2. Open your web browser and navigate to `http://localhost:5000`
+5. Initialize the database:
+   ```bash
+   python src/database.py
+   ```
 
-## Usage
+6. Run the server:
+   ```bash
+   python src/server.py
+   ```
 
-1. Enter your username when prompted
-2. Start chatting with other users in the chat room
-3. Messages will appear in real-time as other users send them
+7. Access the application at `http://localhost:8000`
 
-## Contributing
+## Development
 
-Feel free to fork the repository and submit pull requests for any improvements.
+This project is built incrementally with a focus on simplicity and maintainability. Each component is designed to be independent and easily modifiable.
+
+## Security Notes
+
+- Store your GitHub token securely
+- Never commit the `.env` file
+- Use HTTPS in production
+- Implement proper input validation
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Last Updated
-
-2025-01-07
+MIT License
